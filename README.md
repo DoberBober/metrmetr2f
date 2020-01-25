@@ -1,9 +1,3 @@
-#TODO:
-
-1. Helmet.
-2. 
-3. 
-
 ## Building and running on localhost
 
 First install dependencies:
