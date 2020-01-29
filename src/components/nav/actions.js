@@ -27,6 +27,47 @@ export function errorAfterFiveSecond(){
 	}
 }
 
+export function changeFilter(value, type){
+	switch(type){
+		case 'minPrice':
+			return {
+				type: 'FILTER_CHANGE_MIN_PRICE',
+				value
+			}
+			break
+		case 'maxPrice':
+			return {
+				type: 'FILTER_CHANGE_MAX_PRICE',
+				value
+			}
+			break
+		case 'rooms':
+			return {
+				type: 'FILTER_CHANGE_ROOMS',
+				value
+			}
+			break
+		case 'stage':
+			return {
+				type: 'FILTER_CHANGE_STAGE',
+				value
+			}
+			break
+		case 'district':
+			return {
+				type: 'FILTER_CHANGE_DISTRICT',
+				value
+			}
+			break
+		case 'house':
+			return {
+				type: 'FILTER_CHANGE_HOUSE',
+				value
+			}
+			break
+	}
+}
+
 export function fetchFilterData(url){
 	return async (dispatch) => {
 		await fetch(url)
