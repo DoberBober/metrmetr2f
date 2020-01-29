@@ -12,10 +12,10 @@ export function hasError(bool){
 	}
 }
 
-export function mainInfoFetchDataSuccess(mainInfo){
+export function filterDataFetchSuccess(filterData){
 	return {
-		type: 'MAIN_INFO_FETCH_DATA_SUCCESS',
-		mainInfo
+		type: 'FILTER_DATA_FETCH_SUCCESS',
+		filterData
 	}
 }
 
@@ -27,7 +27,7 @@ export function errorAfterFiveSecond(){
 	}
 }
 
-export function fetchMainInfo(url){
+export function fetchFilterData(url){
 	return async (dispatch) => {
 		await fetch(url)
 			.then((response) => {
@@ -37,8 +37,8 @@ export function fetchMainInfo(url){
 				return response
 			})
 			.then((response) => response.json())
-			.then((mainInfo) => {
-				dispatch(mainInfoFetchDataSuccess(mainInfo))
+			.then((filterData) => {
+				dispatch(filterDataFetchSuccess(filterData))
 				dispatch(hasError(false))
 			})
 			.catch(() => {

@@ -4,7 +4,29 @@ import { NavLink } from "react-router-dom";
 import Logo from './logo.svg';
 import './nav.styl';
 
+import { API } from '../../helpers/const';
+
+import { connect } from 'react-redux';
+import { fetchFilterData } from './actions.js';
+
+const mapStateToProps = (state) => {
+	return {
+		filterData: state.filterData,
+		hasError: state.hasError,
+		isLoading: state.isLoading
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchData: (url) => dispatch(fetchFilterData(url))
+	}
+}
+
 class Nav extends Component {
+	componentDidMount(){
+		this.props.fetchData(API + 'filterData')
+	}
 	render() {
 		return (
 			<header className="mainHeader">
@@ -17,45 +39,83 @@ class Nav extends Component {
 						<p className="logo__text logo__text--secondary">Рады новым знакомствам, идеям и предложениям <a href="mailto:info@metrmetr2.ru">info@metrmetr2.ru</a>
 						</p>
 					</div>
-					<form action="#" className="filter">
+					<form action="http://localhost:8000/api/v0/filter" className="filter">
 						<section className="form__section">
 							<p className="form__label">Цена</p>
 							<div className="form__group">
-								<input className="form__input form__input--price" type="number" pattern="[0-9]" min="0" step="100000" placeholder="0" aria-label="Минимальная цена" />
-								<input className="form__input form__input--price" type="number" pattern="[0-9]" min="0" step="100000" placeholder="1" aria-label="Максимальная цена" />
+								<input
+									className="form__input form__input--price"
+									type="number"
+									name="minPrice"
+									pattern="[0-9]"
+									min="0"
+									placeholder="0"
+									aria-label="Минимальная цена"
+								/>
+								{this.props.filterData.maxPrice &&
+									<input
+										className="form__input form__input--price"
+										type="number"
+										name="maxPrice"
+										pattern="[0-9]"
+										min="0"
+										max={this.props.filterData.maxPrice}
+										placeholder={this.props.filterData.maxPrice}
+										aria-label="Максимальная цена"
+									/>
+								}
 							</div>
 						</section>
 						<section className="form__section">
 							<p className="form__label">Количество комнат</p>
 							<div className="form__group">
-								<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id="Ст" value="Ст"/>
-								<label className="form__input" htmlFor="Ст">Ст</label>
-								<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id="1" value="1"/>
-								<label className="form__input" htmlFor="1">1</label>
-								<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id="2" value="2"/>
-								<label className="form__input" htmlFor="2">2</label>
-								<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id="3" value="3"/>
-								<label className="form__input" htmlFor="3">3</label>
+								{this.props.filterData.rooms &&
+									this.props.filterData.rooms.map((room) => {
+										return(
+											<React.Fragment>
+												<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id={room} value={room}/>
+												<label className="form__input" htmlFor={room}>{room}</label>
+											</React.Fragment>
+										)
+									})
+								}
 							</div>
 						</section>
-						<section className="form__section">
-							<label className="form__label" htmlFor="stage">Этап</label>
-							<select className="form__input form__input--select" name="stage" id="stage">
-								<option value="Фундамент">Фундамент</option>
-							</select>
-						</section>
-						<section className="form__section">
-							<label className="form__label" htmlFor="district">Район</label>
-							<select className="form__input form__input--select" name="district" id="district">
-								<option value="Редукторный">Редукторный</option>
-							</select>
-						</section>
-						<section className="form__section">
-							<label className="form__label" htmlFor="house">ЖК</label>
-							<select className="form__input form__input--select" name="house" id="house">
-								<option value="Московский">Московский</option>
-							</select>
-						</section>
+
+						{this.props.filterData.stages &&
+							<section className="form__section">
+								<label className="form__label" htmlFor="stage">Этап</label>
+								<select className="form__input form__input--select" name="stage" id="stage">
+									{this.props.filterData.stages.map((stage) => {
+										return <option key={stage.id} value={stage.id}>{stage.name}</option>
+									})}
+								</select>
+							</section>
+						}
+
+						{this.props.filterData.districts &&
+							<section className="form__section">
+								<label className="form__label" htmlFor="district">Район</label>
+								<select className="form__input form__input--select" name="district" id="district">
+									{this.props.filterData.districts.map((district) => {
+										return <option key={district.id} value={district.id}>{district.name}</option>
+									})}
+								</select>
+							</section>
+						}
+
+						{this.props.filterData.houses &&
+							<section className="form__section">
+								<label className="form__label" htmlFor="house">ЖК</label>
+								<select className="form__input form__input--select" name="house" id="house">
+									{this.props.filterData.houses.map((house) => {
+										return <option key={house.id} value={house.id}>{house.name}</option>
+									})}
+								</select>
+							</section>
+						}
+
+						<button className="form__submit" type="submit">Отфильтровать</button>
 					</form>
 				</div>
 			</header>
@@ -63,4 +123,4 @@ class Nav extends Component {
 	}
 }
 
-export default Nav
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

@@ -6,30 +6,7 @@ import Apartments from '../apartments/';
 
 import NotFound from '../404/';
 
-import { API } from '../../helpers/const';
-
-import { connect } from 'react-redux';
-import { fetchMainInfo } from './actions.js';
-
-const mapStateToProps = (state) => {
-	return {
-		mainInfo: state.mainInfo,
-		hasError: state.hasError,
-		isLoading: state.isLoading
-	}
-}
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		fetchData: (url) => dispatch(fetchMainInfo(url)),
-		showMap: (id) => dispatch(showMap(id)),
-	}
-}
-
 class App extends React.Component {
-	componentDidMount(){
-		this.props.fetchData(API + 'all')
-	}
 	render() {
 		return (
 			<Router history={this.props.history}>
@@ -50,4 +27,4 @@ class App extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
