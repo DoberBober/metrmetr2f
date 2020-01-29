@@ -86,6 +86,7 @@ class Nav extends Component {
 							<section className="form__section">
 								<label className="form__label" htmlFor="stage">Этап</label>
 								<select className="form__input form__input--select" name="stage" id="stage">
+									<option value="" selected >Не выбрано</option>
 									{this.props.filterData.stages.map((stage) => {
 										return <option key={stage.id} value={stage.id}>{stage.name}</option>
 									})}
@@ -97,6 +98,7 @@ class Nav extends Component {
 							<section className="form__section">
 								<label className="form__label" htmlFor="district">Район</label>
 								<select className="form__input form__input--select" name="district" id="district">
+									<option value="" selected >Не выбрано</option>
 									{this.props.filterData.districts.map((district) => {
 										return <option key={district.id} value={district.id}>{district.name}</option>
 									})}
@@ -108,6 +110,7 @@ class Nav extends Component {
 							<section className="form__section">
 								<label className="form__label" htmlFor="house">ЖК</label>
 								<select className="form__input form__input--select" name="house" id="house">
+									<option value="" selected >Не выбрано</option>
 									{this.props.filterData.houses.map((house) => {
 										return <option key={house.id} value={house.id}>{house.name}</option>
 									})}
