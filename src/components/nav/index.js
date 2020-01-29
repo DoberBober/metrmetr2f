@@ -24,8 +24,62 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Nav extends Component {
+	constructor(){
+		super()
+		this.state = {
+			minPrice: 0,
+			maxPrice: 0,
+			rooms: [],
+			stage: '',
+			district: '',
+			house: ''
+		}
+	}
 	componentDidMount(){
 		this.props.fetchData(API + 'filterData')
+	}
+	filter(evt, type){
+		switch(type){
+			case 'minPrice':
+				this.setState({
+					minPrice: evt.target.value
+				})
+				break
+			case 'maxPrice':
+				this.setState({
+					maxPrice: evt.target.value
+				})
+				break
+			case 'rooms':
+				if(this.state.rooms.indexOf(evt.target.value) < 0){
+					this.setState({
+						rooms: [...this.state.rooms, evt.target.value]
+					})
+				} else {
+					let newRoomsValue = this.state.rooms
+					newRoomsValue.splice(this.state.rooms.indexOf(evt.target.value), 1)
+					this.setState({
+						rooms: newRoomsValue
+					})
+				}
+			case 'stage':
+				this.setState({
+					stage: evt.target.value
+				})
+				break
+			case 'district':
+				this.setState({
+					district: evt.target.value
+				})
+				break
+			case 'house':
+				this.setState({
+					house: evt.target.value
+				})
+				break
+			default:
+				break
+		}
 	}
 	render() {
 		return (
@@ -51,6 +105,7 @@ class Nav extends Component {
 									min="0"
 									placeholder="0"
 									aria-label="Минимальная цена"
+									onChange={(evt) => this.filter(evt, "minPrice")}
 								/>
 								{this.props.filterData.maxPrice &&
 									<input
@@ -62,6 +117,7 @@ class Nav extends Component {
 										max={this.props.filterData.maxPrice}
 										placeholder={this.props.filterData.maxPrice}
 										aria-label="Максимальная цена"
+										onChange={(evt) => this.filter(evt, "maxPrice")}
 									/>
 								}
 							</div>
@@ -72,9 +128,16 @@ class Nav extends Component {
 								{this.props.filterData.rooms &&
 									this.props.filterData.rooms.map((room) => {
 										return(
-											<React.Fragment>
-												<input className="form__checkbox visually-hidden" type="checkbox" name="rooms" id={room} value={room}/>
-												<label className="form__input" htmlFor={room}>{room}</label>
+											<React.Fragment key={room}>
+												<input
+													className="form__checkbox visually-hidden"
+													type="checkbox"
+													name="rooms"
+													id={"room-" + room}
+													value={room}
+													onChange={(evt) => this.filter(evt, "rooms")}
+												/>
+												<label className="form__input" htmlFor={"room-" + room}>{room}</label>
 											</React.Fragment>
 										)
 									})
@@ -85,8 +148,13 @@ class Nav extends Component {
 						{this.props.filterData.stages &&
 							<section className="form__section">
 								<label className="form__label" htmlFor="stage">Этап</label>
-								<select className="form__input form__input--select" name="stage" id="stage">
-									<option value="" selected >Не выбрано</option>
+								<select
+									className="form__input form__input--select"
+									name="stage"
+									id="stage"
+									onChange={(evt) => this.filter(evt, "stage")}
+								>
+									<option value="" defaultValue >Не выбрано</option>
 									{this.props.filterData.stages.map((stage) => {
 										return <option key={stage.id} value={stage.id}>{stage.name}</option>
 									})}
@@ -97,8 +165,13 @@ class Nav extends Component {
 						{this.props.filterData.districts &&
 							<section className="form__section">
 								<label className="form__label" htmlFor="district">Район</label>
-								<select className="form__input form__input--select" name="district" id="district">
-									<option value="" selected >Не выбрано</option>
+								<select
+									className="form__input form__input--select"
+									name="district"
+									id="district"
+									onChange={(evt) => this.filter(evt, "district")}
+								>
+									<option value="" defaultValue >Не выбрано</option>
 									{this.props.filterData.districts.map((district) => {
 										return <option key={district.id} value={district.id}>{district.name}</option>
 									})}
@@ -109,8 +182,13 @@ class Nav extends Component {
 						{this.props.filterData.houses &&
 							<section className="form__section">
 								<label className="form__label" htmlFor="house">ЖК</label>
-								<select className="form__input form__input--select" name="house" id="house">
-									<option value="" selected >Не выбрано</option>
+								<select
+									className="form__input form__input--select"
+									name="house"
+									id="house"
+									onChange={(evt) => this.filter(evt, "house")}
+								>
+									<option value="" defaultValue >Не выбрано</option>
 									{this.props.filterData.houses.map((house) => {
 										return <option key={house.id} value={house.id}>{house.name}</option>
 									})}
