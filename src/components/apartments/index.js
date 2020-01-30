@@ -122,7 +122,7 @@ class Apartments extends Component {
 											</div>
 											<div className="table__cell">{item.company}</div>
 											<div className="table__cell">
-												<a href="tel:88002000600">8(800)200-06-00</a>
+												<a href={'tel:' + item.phone.replace(/[-()\s]/g, '')}>{item.phone}</a>
 											</div>
 										</section>
 										{apartment.floors.map((floor, index) => {
@@ -156,7 +156,7 @@ class Apartments extends Component {
 													</div>
 													<div className="table__cell">{item.company}</div>
 													<div className="table__cell">
-														<a href="tel:88002000600">8(800)200-06-00</a>
+														<a href={'tel:' + item.phone.replace(/[-()\s]/g, '')}>{item.phone}</a>
 													</div>
 												</section>
 											)
