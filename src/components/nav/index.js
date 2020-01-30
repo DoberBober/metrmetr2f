@@ -67,20 +67,20 @@ class Nav extends Component {
 						</p>
 					</div>
 					<form action="http://localhost:8000/api/v0/filter" className="filter">
-						<section className="form__section">
-							<p className="form__label">Цена</p>
-							<div className="form__group">
-								<input
-									className="form__input form__input--price"
-									type="number"
-									name="minPrice"
-									pattern="[0-9]"
-									min="0"
-									placeholder="0"
-									aria-label="Минимальная цена"
-									onChange={(evt) => this.filter(evt, "minPrice")}
-								/>
-								{this.props.filterData.maxPrice &&
+						{this.props.filterData.maxPrice &&
+							<section className="form__section">
+								<p className="form__label">Цена</p>
+								<div className="form__group">
+									<input
+										className="form__input form__input--price"
+										type="number"
+										name="minPrice"
+										pattern="[0-9]"
+										min="0"
+										placeholder="0"
+										aria-label="Минимальная цена"
+										onChange={(evt) => this.filter(evt, "minPrice")}
+									/>
 									<input
 										className="form__input form__input--price"
 										type="number"
@@ -92,14 +92,14 @@ class Nav extends Component {
 										aria-label="Максимальная цена"
 										onChange={(evt) => this.filter(evt, "maxPrice")}
 									/>
-								}
-							</div>
-						</section>
-						<section className="form__section">
-							<p className="form__label">Количество комнат</p>
-							<div className="form__group">
-								{this.props.filterData.rooms &&
-									this.props.filterData.rooms.map((room) => {
+								</div>
+							</section>
+						}
+						{this.props.filterData.rooms &&
+							<section className="form__section">
+								<p className="form__label">Количество комнат</p>
+								<div className="form__group">
+									{this.props.filterData.rooms.map((room) => {
 										return(
 											<React.Fragment key={room}>
 												<input
@@ -113,10 +113,10 @@ class Nav extends Component {
 												<label className="form__input" htmlFor={"room-" + room}>{room}</label>
 											</React.Fragment>
 										)
-									})
-								}
-							</div>
-						</section>
+									})}
+								</div>
+							</section>
+						}
 
 						{this.props.filterData.stages &&
 							<section className="form__section">
@@ -168,8 +168,6 @@ class Nav extends Component {
 								</select>
 							</section>
 						}
-
-						<button className="form__submit" type="submit">Отфильтровать</button>
 					</form>
 				</div>
 			</header>

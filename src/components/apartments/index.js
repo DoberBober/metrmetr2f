@@ -7,6 +7,8 @@ import Hirepurchase from './hirepurchase.svg';
 import Mortgage from './mortgage.svg';
 import Maternal from './maternal.svg';
 
+import Empty from '../empty/';
+
 import { API } from '../../helpers/const';
 
 import { connect } from 'react-redux';
@@ -79,6 +81,9 @@ class Apartments extends Component {
 							<div className="table__cell table__cell--legend">Застройщик</div>
 							<div className="table__cell table__cell--legend">Телефон</div>
 						</section>
+						{!this.props.apartments.length &&
+							<Empty />
+						}
 						{this.props.apartments.map((item) => {
 							return item.apartments.map((apartment) => {
 								return(
