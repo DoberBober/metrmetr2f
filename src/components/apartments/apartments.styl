@@ -9,11 +9,13 @@
 .table__item--main
 	padding-left 20px
 
-.table__item--hidden
+.table__item--options
 	display none
 
-.table__item--main + .table__item:not(.table__item--main),
-.table__item:not(.table__item--main) + .table__item:not(.table__item--main)
+.table__item--open ~ .table__item--options
+	display grid
+
+.table__item--main ~ .table__item:not(.table__item--main)
 	box-shadow inset 5px 0 0 0 #ccc
 
 .table__item--spoiler
@@ -36,9 +38,6 @@
 .table__item--open
 	&::after
 		transform rotate(0deg)
-
-// .table__item--open, .table__item--visible
-// 	background-color #eee
 
 .table__item:not(.table__item--head)
 	&:hover
