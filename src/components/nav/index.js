@@ -98,7 +98,7 @@ class Nav extends Component {
 						{this.props.filterData.rooms &&
 							<section className="form__section">
 								<p className="form__label">Количество комнат</p>
-								<div className="form__group">
+								<div className="form__group form__group--rooms">
 									{this.props.filterData.rooms.map((room) => {
 										return(
 											<React.Fragment key={room}>
