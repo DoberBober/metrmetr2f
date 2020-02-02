@@ -8,6 +8,8 @@ import Mortgage from './mortgage.svg';
 import Maternal from './maternal.svg';
 
 import Empty from '../empty/';
+import Loading from '../loading/';
+import SomethingWrong from '../somethingWrong/';
 
 import { API } from '../../helpers/const';
 
@@ -38,11 +40,11 @@ class Apartments extends Component {
 	}
 	render() {
 		if (this.props.hasError) {
-			return <p>К сожалению, что-то пошло не так. Пожалуйста, <a href="javascript:document.location.reload(true);">перезагрузите</a> страницу.</p>;
+			return <SomethingWrong />;
 		}
 
 		if (this.props.isLoading) {
-			return <p>Загрузка...</p>;
+			return <Loading />;
 		}
 		return (
 			<article className="table">
