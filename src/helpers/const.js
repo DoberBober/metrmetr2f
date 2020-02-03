@@ -1,3 +1,3 @@
-const API = 'http://127.0.0.1:8000/api/v0/';
+const API = 'https://admin.metrmetr2.ru/api/v0/';
 
 export { API };

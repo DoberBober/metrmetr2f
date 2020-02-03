@@ -66,7 +66,7 @@ class Nav extends Component {
 						<p className="logo__text logo__text--secondary">Рады новым знакомствам, идеям и предложениям <a href="mailto:info@metrmetr2.ru">info@metrmetr2.ru</a>
 						</p>
 					</div>
-					<form action=`${API}filter` className="filter">
+					<form action={API + "filter"} className="filter">
 						{this.props.filterData.maxPrice &&
 							<section className="form__section">
 								<p className="form__label">Цена</p>
