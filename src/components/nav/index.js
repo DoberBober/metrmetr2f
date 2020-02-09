@@ -47,8 +47,8 @@ class Nav extends Component {
 			case 'district':
 				this.props.changeFilter(evt.target.value, 'district')
 				break
-			case 'house':
-				this.props.changeFilter(evt.target.value, 'house')
+			case 'company':
+				this.props.changeFilter(evt.target.value, 'company')
 				break
 			default:
 				break
@@ -152,18 +152,18 @@ class Nav extends Component {
 							</section>
 						}
 
-						{this.props.filterData.houses &&
+						{this.props.filterData.companies &&
 							<section className="form__section">
-								<label className="form__label" htmlFor="house">ЖК</label>
+								<label className="form__label" htmlFor="company">Застройщик</label>
 								<select
 									className="form__input form__input--select"
-									name="house"
-									id="house"
-									onChange={(evt) => this.filter(evt, "house")}
+									name="company"
+									id="company"
+									onChange={(evt) => this.filter(evt, "company")}
 								>
 									<option value="" defaultValue >Не выбрано</option>
-									{this.props.filterData.houses.map((house) => {
-										return <option key={house.id} value={house.name}>{house.name}</option>
+									{this.props.filterData.companies.map((company) => {
+										return <option key={company.id} value={company.name}>{company.name}</option>
 									})}
 								</select>
 							</section>

@@ -78,8 +78,8 @@ class Apartments extends Component {
 								}
 							})
 							.filter((apartment) => {
-								if(this.props.filterState.house){
-									return apartment.name == this.props.filterState.house
+								if(this.props.filterState.company){
+									return apartment.company == this.props.filterState.company
 								} else {
 									return apartment
 								}

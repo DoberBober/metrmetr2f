@@ -59,9 +59,9 @@ export function changeFilter(value, type){
 				value
 			}
 			break
-		case 'house':
+		case 'company':
 			return {
-				type: 'FILTER_CHANGE_HOUSE',
+				type: 'FILTER_CHANGE_COMPANY',
 				value
 			}
 			break

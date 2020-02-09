@@ -44,9 +44,9 @@ export function filterState(state = {
 			return Object.assign({}, state, {
 				district: action.value
 			})
-		case 'FILTER_CHANGE_HOUSE':
+		case 'FILTER_CHANGE_COMPANY':
 			return Object.assign({}, state, {
-				house: action.value
+				company: action.value
 			})
 		default:
 			return state
